@@ -1,13 +1,21 @@
 import AIModel from "../models/AIMode.js";
 import calculationModel from "../models/CalcuationResult.js";
-import userModel from "../models/userInput.js";
+import userAuthModel from "../models/user.js";
+import userInputModel from "../models/userInput.js";
 import { generateAIReport } from "../service/aiService.js";
 import { calculateHarvest } from "../service/calculateHarvest.js";
 import { getAnnualRainfall } from "../service/rainwaterApi.js";
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import validator from 'validator';
 //saving input
 export const saveUserInput = async (req, res) => {
   try {
-    const data = await userModel.create(req.body);
+    req.body.userId = req.user.id;
+    
+
+    const data = await userInputModel.create(req.body);
+
     res.json({ success: true, message: "User input saved", data });
   } catch (error) {
     console.error(error);
@@ -18,10 +26,10 @@ export const saveUserInput = async (req, res) => {
 //result calcuation controller
 export const runCalcuation =async(req,res)=>{
     try {
-        const { userId } = req.body;
+        const  userId  = req.user.id;
 
       // 1. Fetch user input
-    const user = await userModel.findById(userId);
+    const user = await userInputModel.findOne({userId});
     if (!user) return res.status(404).json({ message: "User not found" });
 
      
@@ -100,4 +108,96 @@ export const generateReport =async(req,res)=>{
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+}
+
+
+//registrating user
+export const registratingUser = async(req,res)=>{
+  try {
+     const {name,email,password} = req.body;
+     if(!name||!password||!email){
+        return res.json({success:false, message:"missing details"})
+    }
+    if(!validator.isEmail(email)){
+          return res.json({success:false, message:"Enter a valid email"})
+    }
+    const userExist = await userAuthModel.findOne({ email });
+    if (userExist) {
+      return res.json({ message: "Email already registered" });
+    }
+
+    //hashing user password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const userData ={
+        name,
+        email,
+        password:hashedPassword
+    }
+
+    const newUser =new userAuthModel(userData)
+     const user = await newUser.save()
+
+      const token = jwt.sign(
+      { _id: user._id },
+
+      process.env.JWT_SECRET,
+     
+    );
+ res.json({
+  success: true,
+  user: {
+    _id: user._id,
+    name: user.name,
+    email: user.email
+  },
+  token
+});
+  } catch (error) {
+     console.log(error)
+      res.status(500).json({ message: "Server error", error: error.message });
+  }
+}
+
+//logging
+export const login = async(req,res)=>{
+  try {
+    const{email,password} = req.body
+    console.log( req.body);
+
+    
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: "Missing email or password" });
+    }
+  
+    const user = await userAuthModel.findOne({email})
+    if (!user) {
+      return res.status(400).json({ success: false, message: "User not found" });
+    }
+    const isMatch = await bcrypt.compare(password,user.password)
+   if (!isMatch) {
+      return res.status(400).json({ success: false, message: "Invalid password" });
+    }
+     const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      
+    );
+    console.log("TOKEN PAYLOAD ID =>", user._id);
+
+     res.json({
+      success: true,
+      message: "Login successful",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email
+      },
+      token
+    });
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 }

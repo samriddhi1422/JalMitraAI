@@ -4,7 +4,7 @@ const calculationResultSchema = new mongoose.Schema(
   {
     userInputId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "UserInput",
       required: true,
     },
 

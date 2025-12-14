@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const userInputSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserAuth",
+      required: true,
+    },
     name: { type: String, required: true },
     roofArea: { type: Number, required: true },
     location: { type: String, required: true },
@@ -12,7 +17,7 @@ const userInputSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const userModel =
-  mongoose.models.User || mongoose.model("User", userInputSchema);
+const userInputModel =
+  mongoose.models.UserInput || mongoose.model("UserInput", userInputSchema);
 
-  export default userModel
+  export default userInputModel
