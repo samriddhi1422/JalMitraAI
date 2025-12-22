@@ -13,6 +13,7 @@ import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
 import Report from "./pages/report";
 import CalculationLoading from "./pages/CalculationLoading";
+import ViewReport from "./pages/viewReport";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/monthly" element={<Monthy />} />
             <Route path="/ar" element={<AR />} />
             <Route path="/report" element={<Report/>} />
+            <Route path="/view-report/:id" element={<ViewReport/>} />
             <Route path="/CalculationLoading" element={<CalculationLoading/>} />
            
 

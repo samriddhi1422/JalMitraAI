@@ -223,7 +223,7 @@ export const login = async(req,res)=>{
 
 export const reports = async (req, res) => {
   try {
-    const {userId} = req.body;
+    const userId = req.user.id
 
     const reports = await AIModel.find({ userId });
 
@@ -241,3 +241,20 @@ export const reports = async (req, res) => {
     });
   }
 };
+
+//fetch report 
+export const viewReport = async(req,res)=>{
+  try {
+    const report = await AIModel.findById(req.params.id)
+     if (!report) {
+      return res.status(404).json({ success: false });
+    }
+
+    res.json({
+      success: true,
+      report,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false });
+  }
+}
