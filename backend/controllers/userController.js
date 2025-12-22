@@ -26,14 +26,16 @@ export const saveUserInput = async (req, res) => {
 //result calcuation controller
 export const runCalcuation =async(req,res)=>{
     try {
-        const  userId  = req.user.id;
+        const { userInputId } = req.body;
+        console.log("REQ BODY:", req.body);
+console.log("TYPE:", typeof req.body.userInputId);
 
       // 1. Fetch user input
-    const user = await userInputModel.findOne({userId});
+    const user = await userInputModel.findById(userInputId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
      
-    const annualRainfall = await getAnnualRainfall(user.location)  // Replace with API later
+    const annualRainfall = await getAnnualRainfall(user.location)  
 
     //calcuate
    const resultValues = calculateHarvest({
@@ -44,7 +46,7 @@ export const runCalcuation =async(req,res)=>{
 
     //save to db
     const result = await calculationModel.create({
-         userInputId: userId,
+         userInputId: user._id,
       annualRainfall,
       ...resultValues,
     })
@@ -60,11 +62,22 @@ export const runCalcuation =async(req,res)=>{
 
 //generate report
 export const generateReport =async(req,res)=>{
+  
     try {
-        const { calcId } = req.body;
-        const calc = await calculationModel.findById(calcId);
+        const { calId } = req.body;
+        console.log("REQ BODY:", req.body);
+const userId = req.user.id;
+        const calc = await calculationModel.findById(calId);
          if (!calc) return res.status(404).json({ message: "Calculation not found" });
+console.log("CALC ID RECEIVED:", calId);
 
+const userInput = await userInputModel.findById(calc.userInputId);
+if (!userInput) {
+  return res.status(404).json({ message: "User input not found" });
+}
+const city = userInput.location;
+    const roofArea = userInput.roofArea;
+const annualRainfall = await getAnnualRainfall(city);
     const harvestedWater = calc.harvestedWater;
     const requiredWater = calc.requiredWater;
     const waterSaved = calc.harvestedWater - calc.requiredWater;
@@ -89,6 +102,7 @@ export const generateReport =async(req,res)=>{
 
     //save to db
     const report = await AIModel.create({
+      userId,
      userInputId: calc.userInputId,
       calculationId: calc._id,
       harvestedWater,
@@ -96,6 +110,9 @@ export const generateReport =async(req,res)=>{
       tankSize,
       cost,
       roi,
+        city,
+      roofArea,
+      annualRainfall,
       paybackPeriod,
       feasibilityText: harvestedWater >= requiredWater ? "Feasible" : "Not Feasible",
       aiReportText: aiText,
@@ -201,3 +218,26 @@ export const login = async(req,res)=>{
     res.status(500).json({ success: false, message: "Server error" });
   }
 }
+
+//get report in dashboard
+
+export const reports = async (req, res) => {
+  try {
+    const {userId} = req.body;
+
+    const reports = await AIModel.find({ userId });
+
+    return res.json({
+      success: true,
+      message: "Showing reports",
+      reports,
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};

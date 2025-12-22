@@ -52,7 +52,7 @@ export default function Calculation() {
 
     
     
-     await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/saveUserInput`, {
+    const res=  await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user/saveUserInput`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,11 +60,60 @@ export default function Calculation() {
       },
       body: JSON.stringify(payload),
     });
-    
-     navigate("/CalculationLoading");
+    const data = await res.json()
+    if(data.success){
+      console.log(data.data)
+  navigate("/CalculationLoading", {
+  state: {
+    userInputId: data.data._id,
+  },
+});
 
-   
-  };
+    }
+  }
+
+
+
+   const handleUseCurrentLocation = () => {
+  if (!("geolocation" in navigator)) {
+    alert("Geolocation not supported");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+
+     
+      try {
+        const res = await fetch(
+          `https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}`
+        );
+        const data = await res.json();
+
+        const city =
+          data.address.city ||
+          data.address.town ||
+          data.address.village ||
+          "";
+
+        updateFormData("city", city);
+      } catch (err) {
+        console.error("Reverse geocode failed", err);
+      }
+    },
+    (error) => {
+      alert("Please allow location access");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+    }
+  );
+};
+
+
+
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -189,18 +238,14 @@ export default function Calculation() {
                     </datalist>
                   </div>
 
-                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                    <div className="flex items-center gap-3 mb-2">
-                      <MapPin className="w-5 h-5 text-gray-400" />
-                      <span className="font-medium text-gray-700">Location Preview</span>
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {formData.city || 'City name will appear here'}
-                    </div>
-                    <div className="mt-4 h-40 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <span className="text-gray-500">Map Preview</span>
-                    </div>
-                  </div>
+                <button
+  type="button"
+  onClick={()=>handleUseCurrentLocation()}
+  className="mt-3 text-sm text-teal-600 hover:text-teal-700 font-medium"
+>
+  Use Current Location
+</button>
+
                 </div>
         )}
 
@@ -293,4 +338,5 @@ export default function Calculation() {
     </div>
     </div>
   );
+
 }

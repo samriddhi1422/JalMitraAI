@@ -7,7 +7,7 @@ const calculationResultSchema = new mongoose.Schema(
       ref: "UserInput",
       required: true,
     },
-
+   
     annualRainfall: Number, // from API 
 
     harvestedWater: Number, // total liters per year
