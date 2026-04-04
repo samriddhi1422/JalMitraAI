@@ -1,0 +1,114 @@
+{
+  "project_name": "Jalmitra AI",
+  "data_year": 2025,
+  "country": "India",
+  "category": "Rainwater Harvesting & Water Conservation",
+  "subsidies": [
+    {
+      "level": "Central",
+      "scheme_name": "Jal Shakti Abhiyan: Catch the Rain",
+      "authority": "Ministry of Jal Shakti",
+      "details": "A nationwide campaign promoting rainwater harvesting and groundwater recharge through convergence with schemes like MGNREGA and PMKSY.",
+      "benefits": "Project-based funding; typically covers 50% to 100% of costs for rural and community water conservation structures.",
+      "target": "Individuals, community groups, local governments",
+      "link": "https://jalshakti-dowr.gov.in/"
+    },
+    {
+      "level": "Central",
+      "scheme_name": "PM Krishi Sinchayee Yojana (PMKSY) – Per Drop More Crop",
+      "authority": "Department of Agriculture & Farmers Welfare",
+      "details": "Provides financial assistance for farm ponds, rainwater harvesting structures, and micro-irrigation systems.",
+      "benefits": "Up to ₹52,000 for farm ponds; additional subsidies for drip and sprinkler irrigation systems.",
+      "target": "Farmers (priority to small, marginal, and SC/ST farmers)",
+      "link": "https://pmksy.gov.in/"
+    },
+    {
+      "level": "Central",
+      "scheme_name": "MGNREGS – Water Conservation & Rainwater Harvesting",
+      "authority": "Ministry of Rural Development",
+      "details": "Supports construction of rainwater harvesting structures such as check dams, recharge pits, and farm ponds through rural employment programs.",
+      "benefits": "Labour cost coverage and partial material cost support.",
+      "target": "Rural households and village communities",
+      "link": "https://nrega.nic.in/"
+    },
+    {
+      "level": "State",
+      "state": "Rajasthan",
+      "scheme_name": "Farm Pond Scheme",
+      "authority": "Rajasthan Agriculture Department",
+      "details": "Financial assistance for constructing plastic-lined or masonry farm ponds for rainwater storage and irrigation.",
+      "benefits": "70% to 90% subsidy up to ₹1.35 lakh depending on farmer category.",
+      "target": "Farmers (SC/ST, small and marginal farmers)",
+      "link": "https://agriculture.rajasthan.gov.in/"
+    },
+    {
+      "level": "State",
+      "state": "Goa",
+      "scheme_name": "Nital Goem Nital Baim",
+      "authority": "Goa Water Resources Department",
+      "details": "Provides subsidy for rooftop rainwater harvesting in individual houses and residential complexes.",
+      "benefits": "50% of project cost (up to ₹1,00,000 for individual houses and ₹5,00,000 for residential complexes).",
+      "target": "Homeowners and housing societies",
+      "link": "https://goawrd.gov.in/"
+    },
+    {
+      "level": "State",
+      "state": "Odisha",
+      "scheme_name": "CHHATA Scheme",
+      "authority": "Water Resources Department, Odisha",
+      "details": "Community Harnessing and Harvesting Rainwater Artificially from Terrace to Aquifer (CHHATA) for urban groundwater recharge.",
+      "benefits": "Financial assistance for rooftop rainwater harvesting and groundwater recharge systems.",
+      "target": "Urban households, institutions, and apartment complexes",
+      "link": "https://dowrodisha.gov.in/"
+    },
+    {
+      "level": "State",
+      "state": "Delhi",
+      "scheme_name": "Delhi Jal Board Rainwater Harvesting Assistance",
+      "authority": "Delhi Jal Board (DJB)",
+      "details": "Financial assistance to RWAs and group housing societies to install rainwater harvesting systems.",
+      "benefits": "50% of total cost or ₹50,000 (whichever is less) plus 10% rebate on water bills.",
+      "target": "RWAs and cooperative group housing societies",
+      "link": "https://delhijalboard.nic.in/"
+    },
+    {
+      "level": "State",
+      "state": "Karnataka",
+      "scheme_name": "Krishi Bhagya Scheme",
+      "authority": "Karnataka Agriculture Department",
+      "details": "Integrated water management scheme supporting rainwater harvesting and farm ponds for dryland farmers.",
+      "benefits": "80% to 90% subsidy for storage tanks, farm ponds, and polythene lining.",
+      "target": "Dryland and rain-fed farmers",
+      "link": "https://raitamitra.karnataka.gov.in/"
+    },
+    {
+      "level": "Local",
+      "state": "Madhya Pradesh",
+      "scheme_name": "Property Tax Rebate for Rainwater Harvesting",
+      "authority": "Urban Local Bodies",
+      "details": "Municipal corporations provide property tax rebates for buildings equipped with approved rainwater harvesting systems.",
+      "benefits": "Approximately 5% to 6% rebate on annual property tax (varies by city).",
+      "target": "Residential and commercial property owners",
+      "link": "Municipal Corporation Notifications"
+    },
+    {
+      "level": "Local",
+      "state": "Gujarat",
+      "scheme_name": "Surat Municipal Corporation Rainwater Harvesting Subsidy",
+      "authority": "Surat Municipal Corporation",
+      "details": "Partial financial support to encourage installation of rainwater harvesting recharge systems.",
+      "benefits": "Up to 50% subsidy (maximum approximately ₹2,000).",
+      "target": "Residential property owners",
+      "link": "Municipal Corporation Orders"
+    }
+  ],
+  "policies": [
+    {
+      "name": "Model Building Bye-Laws (MBBL) 2016 – Rainwater Harvesting",
+      "authority": "Ministry of Housing & Urban Affairs",
+      "details": "Mandates rainwater harvesting systems in new buildings across most Indian states and Union Territories.",
+      "impact": "Increases compulsory adoption of rainwater harvesting in urban construction projects.",
+      "link": "https://mohua.gov.in/"
+    }
+  ]
+}
