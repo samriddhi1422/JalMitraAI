@@ -27,12 +27,13 @@ const handleSubmit = async (e) => {
     const res = await fetch(`${API_BASE_URL}/api/user/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name: fullName, email, password }),
     });
 
     const data = await res.json();
-
-    if (!res.ok) throw new Error(data.message);
+if (!data.success) {
+  throw new Error(data.message);
+}
     signIn(data.user, data.token);
     localStorage.setItem("token", data.token);
     navigate("/dashboard");
