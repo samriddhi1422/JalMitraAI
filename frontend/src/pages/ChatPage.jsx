@@ -6,7 +6,7 @@ export default function ChatPage() {
   const [selectedReport, setSelectedReport] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-const [showChat, setShowChat] = useState(window.innerWidth >= 640);
+const [showChat, setShowChat] = useState("false");
   const messagesEndRef = useRef(null);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
