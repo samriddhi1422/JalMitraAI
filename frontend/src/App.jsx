@@ -4,15 +4,15 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Calculation from "./pages/Calculation";
 import GovtSchemes from "./pages/GovtSchemes";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import Monthy from "./pages/Monthy";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import DashboardLayout from "./pages/DashboardLayout";
 import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
-import Report from "./pages/report";
+import Report from "./pages/Report";
 import CalculationLoading from "./pages/CalculationLoading";
-import ViewReport from "./pages/viewReport";
+import ViewReport from "./pages/ViewReport";
 import ChatPage from "./pages/ChatPage";
 
 
