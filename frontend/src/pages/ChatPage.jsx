@@ -112,7 +112,9 @@ useEffect(() => {
             <p className="text-xs font-semibold text-teal-700 uppercase tracking-widest">Your Reports</p>
             <p className="text-xs text-gray-400 mt-0.5">
               {reports.length} report{reports.length !== 1 ? "s" : ""} found
+              
             </p>
+            <p className="text-xs text-gray-400 mt-0.5"> select report to chat and ask</p>
           </div>
 
           <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-2.5">
