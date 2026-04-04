@@ -6,7 +6,7 @@ export default function ChatPage() {
   const [selectedReport, setSelectedReport] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [showChat, setShowChat] = useState(false);
+const [showChat, setShowChat] = useState(window.innerWidth >= 640);
   const messagesEndRef = useRef(null);
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -31,7 +31,11 @@ export default function ChatPage() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
+useEffect(() => {
+  if (!selectedReport) {
+    setShowChat(false);
+  }
+}, [selectedReport]);
   const handleSelectReport = (r) => {
     setSelectedReport(r);
     setShowChat(true);
