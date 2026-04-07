@@ -13,6 +13,20 @@ It provides instant, data-driven recommendations including ROI, payback period, 
 
 ## 📸 Screenshots
 
+### Dashboard
+![Dashboard](./dashboard)
+
+### Analysis Result
+![Analysis](./analysis.png)
+
+### Monthly Chart
+![Monthly Chart](./monthly chart.png)
+
+### AI Chatbot
+![Chatbot](./chatbot.png)
+
+### Report
+![Report](./report.png)
 
 ---
 
